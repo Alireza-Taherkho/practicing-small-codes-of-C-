@@ -2,6 +2,8 @@
 #include <cstdint>
 #include <bitset>
 #include <vector>
+#include <random>
+#include <chrono>
 
 
 
@@ -206,6 +208,25 @@ void testBit(){
 }
 
 
+void randomBit(){
+    std::cout << "Start To Randoming....\n";
+    std::mt19937 mt{static_cast<int>(std::chrono::steady_clock::now().time_since_epoch().count())};
+    std::uniform_int_distribution timesRange{1, 10};
+    std::uniform_int_distribution placesRange{0, 7};
+    short times{timesRange(mt)};
+    short places{placesRange(mt)};
+
+
+    for (short i{times}; i <= 10; i++)
+    {     
+        num.flip(places);
+        std::cout << "Done!\n";
+        places = placesRange(mt);
+    }
+    std::cout << "End Randoming....\n";
+}
+
+
 void Panel(){
     short request;
     bool Finish {false};
@@ -246,10 +267,14 @@ void Panel(){
                 break;
 
             case 6:
-                std::cout << "Operations:   Set = 1     Reset = 2     Flip = 3     Show All = 4     Show One = 5     Operations List = 6     Exit = 7  ->\n";
+                std::cout << "Operations:   Set = 1     Reset = 2     Flip = 3     Show All = 4     Show One = 5     Operations List = 6     Random Flip = 7     Exit = 8  ->\n";
                 break;
 
             case 7:
+                randomBit();
+                break;
+
+            case 8:
                 Finish = true;
                 break;
     
@@ -268,7 +293,7 @@ void Panel(){
 int main(){
 
     std::cout << "Your Bit number: " << num << '\n';
-    std::cout << "Operations:   Set = 1     Reset = 2     Flip = 3     Show All = 4     Show One = 5     Operations List = 6     Exit = 7  ->\n";
+    std::cout << "Operations:   Set = 1     Reset = 2     Flip = 3     Show All = 4     Show One = 5     Operations List = 6     Random Flip = 7     Exit = 8  ->\n";
 
     Panel();
 
