@@ -50,7 +50,7 @@ void Panel(){
             case 4:
                 std::cout << result << '\n';
                 break;
-
+ 
             case 5:
                 bitTools::testBit();
                 break;
